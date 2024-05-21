@@ -1,0 +1,30 @@
+GET http://localhost:3001/tasks/
+
+###
+
+GET http://localhost:3001/tasks?search_q=h
+
+###
+
+POST http://localhost:3001/tasks/ 
+Content-Type: application/json
+
+{
+    "name": "Learn HTML",
+    "description": "HyperTextMarkUp Langauge",
+    "status": "High",
+    "deadline": "2024-05-27"
+}
+
+###
+
+PUT http://localhost:3001/tasks/6
+Content-Type: application/json
+
+{
+    "status": "Completed"
+}
+
+###
+
+DELETE http://localhost:3001/tasks/6
