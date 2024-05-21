@@ -43,12 +43,14 @@ app.post("/tasks/", async (req, res) => {
   const { name, description, status, deadline, category } = req.body;
 
   if (category == "done") {
-    status = "Completed";
+    stata = "Completed";
+  } else {
+    stata = status;
   }
 
   const addTodoQuery = `
     INSERT INTO task(name, description, status, deadline, category)
-    VALUES ('${name}', '${description}', '${status}', '${deadline}', '${category}');
+    VALUES ('${name}', '${description}', '${stata}', '${deadline}', '${category}');
     `;
   const dbResponse = await db.run(addTodoQuery);
   res.send({
