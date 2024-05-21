@@ -40,10 +40,15 @@ app.get("/tasks/", async (req, res) => {
 
 //Add Todos API
 app.post("/tasks/", async (req, res) => {
-  const { name, description, status, deadline } = req.body;
+  const { name, description, status, deadline, category } = req.body;
+
+  if (category == "done") {
+    status = "Completed";
+  }
+
   const addTodoQuery = `
-    INSERT INTO task(name, description, status, deadline)
-    VALUES ('${name}', '${description}', '${status}', '${deadline}');
+    INSERT INTO task(name, description, status, deadline, category)
+    VALUES ('${name}', '${description}', '${status}', '${deadline}', '${category}');
     `;
   const dbResponse = await db.run(addTodoQuery);
   res.send({
@@ -65,15 +70,23 @@ app.put("/tasks/:taskId", async (req, res) => {
     description = dbTask.description,
     status = dbTask.status,
     deadline = dbTask.deadline,
+    category = dbTask.category,
   } = req.body;
+
+  if (category == "done") {
+    stata = "Completed";
+  } else {
+    stata = status;
+  }
 
   const updateTaskQuery = `
     UPDATE task
     SET 
         name='${name}',
         description='${description}',
-        status='${status}',
-        deadline='${deadline}'
+        status='${stata}',
+        deadline='${deadline}',
+        category='${category}'
     WHERE 
         id=${taskId};
   `;
