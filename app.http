@@ -6,6 +6,10 @@ GET http://localhost:3001/tasks?search_q=h
 
 ###
 
+GET http://localhost:3001/tasks?orderby=deadline
+
+###
+
 POST http://localhost:3001/tasks/ 
 Content-Type: application/json
 
@@ -13,17 +17,22 @@ Content-Type: application/json
     "name": "Learn HTML",
     "description": "HyperTextMarkUp Langauge",
     "status": "High",
-    "deadline": "2024-05-27"
+    "deadline": "2024-05-27",
+    "category": "done"
 }
 
 ###
 
-PUT http://localhost:3001/tasks/6
+PUT http://localhost:3001/tasks/2
 Content-Type: application/json
 
 {
-    "status": "Completed"
+    "category": "done"
 }
+
+# {
+#     "status": "Completed"
+# }
 
 ###
 

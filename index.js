@@ -30,9 +30,9 @@ initializeDBAndServer();
 
 // Get Todos API
 app.get("/tasks/", async (req, res) => {
-  const { search_q = "" } = req.query;
+  const { search_q = "", orderby = "id" } = req.query;
   const getTodosQuery = `
-    SELECT * FROM task WHERE name LIKE '%${search_q}%';
+    SELECT * FROM task WHERE name LIKE '%${search_q}%' ORDER BY ${orderby} ASC;
     `;
   const tasksArray = await db.all(getTodosQuery);
   res.send(tasksArray);
